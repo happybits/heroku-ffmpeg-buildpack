@@ -8,6 +8,8 @@ echo "-----> Install ffmpeg"
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
 
+echo "Cloning with access token: $GIT_OAUTH"
+
 git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
 cd happybits-ffmpeg-fork
 configure
