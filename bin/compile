@@ -8,6 +8,10 @@ VENDOR_DIR="vendor"
 
 export "GIT_OAUTH=$(cat $ENV_DIR/GIT_OAUTH)"
 
+echo "       installing yasm"
+apt-get install yasm
+
+echo "       cloning happybits ffmpeg"
 git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
 cd happybits-ffmpeg-fork
 ./configure
