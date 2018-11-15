@@ -6,17 +6,8 @@ CACHE_DIR=$2
 ENV_DIR=$3
 VENDOR_DIR="vendor"
 
-echo "BUILD_DIR: $BUILD_DIR"
-echo "ENV_DIR: $ENV_DIR"
-echo "exporting PATH:"
-ls $ENV_DIR
-echo "oauth token:"
-cat $ENV_DIR/GIT_OAUTH
 export "GIT_OAUTH=$(cat $ENV_DIR/GIT_OAUTH)"
-echo "GIT_OAUTH: $GIT_OAUTH"
 
-
-echo "Cloning with access token: $GIT_OAUTH"
 git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
 cd happybits-ffmpeg-fork
 configure
