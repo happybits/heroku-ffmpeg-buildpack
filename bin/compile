@@ -1,0 +1,20 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+echo "-----> Install ffmpeg"
+BUILD_DIR=$1
+VENDOR_DIR="vendor"
+
+git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
+cd happybits-ffmpeg-fork
+configure
+make
+make install
+
+# echo "exporting PATH" | indent
+# PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
+# mkdir -p $(dirname $PROFILE_PATH)
+# echo 'export PATH="$PATH:${HOME}/vendor/ffmpeg"' >> $PROFILE_PATH
