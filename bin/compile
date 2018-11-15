@@ -15,8 +15,11 @@ export_env_dir() {
 
 echo "-----> Install ffmpeg"
 BUILD_DIR=$1
+ENV_DIR=$2
 VENDOR_DIR="vendor"
 
+echo "BUILD_DIR: $BUILD_DIR"
+echo "ENV_DIR: $ENV_DIR"
 echo "exporting PATH"
 export_env_dir
 echo "Cloning with access token: $GIT_OAUTH"
