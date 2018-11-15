@@ -16,11 +16,11 @@ echo "Unpacking yasm"
 tar -xf yasm-1.3.0.tar.gz
 cd yasm-1.3.0
 echo "Running configure"
-./configure --prefix="$BUILD_DIR" --disable-debug >/dev/null 2>&1
-echo "Running make with target install"
-make install >/dev/null 2>&1
-echo "Running make with target distclean"
-make distclean > /dev/null 2>&1
+./configure
+echo "Running make"
+make
+echo "Running make install"
+make install
 
 # echo "Cloning happybits ffmpeg" | indent
 # git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
