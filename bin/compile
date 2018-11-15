@@ -89,7 +89,7 @@ echo "Cloning happybits ffmpeg" | indent
 cd $BUILD_DIR
 git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
 cd happybits-ffmpeg-fork
-./configure --prefix="$BUILD_DIR" --enable-libx264
+./configure --prefix="$BUILD_DIR" --enable-libx264 --enable-gpl --enable-static --enable-pic
 make
 make install
 
