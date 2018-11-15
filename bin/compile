@@ -33,7 +33,7 @@ if [ -f "$2/vendor/bin/ffmpeg" ]; then
  	cp -R  "$2/vendor" $1
  	create_profile_script
  	exit 0
- fi
+fi
 
 
 # begin ffmpeg
