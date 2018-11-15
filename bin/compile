@@ -10,7 +10,7 @@ export "GIT_OAUTH=$(cat $ENV_DIR/GIT_OAUTH)"
 
 git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
 cd happybits-ffmpeg-fork
-configure
+./configure
 make
 make install
 
