@@ -8,8 +8,8 @@ echo "-----> Install ffmpeg"
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
 
+export_env_dir()
 echo "Cloning with access token: $GIT_OAUTH"
-
 git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
 cd happybits-ffmpeg-fork
 configure
@@ -20,3 +20,17 @@ make install
 # PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
 # mkdir -p $(dirname $PROFILE_PATH)
 # echo 'export PATH="$PATH:${HOME}/vendor/ffmpeg"' >> $PROFILE_PATH
+
+
+export_env_dir() {
+  env_dir=$1
+  whitelist_regex=${2:-''}
+  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+  if [ -d "$env_dir" ]; then
+    for e in $(ls $env_dir); do
+      echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+      export "$e=$(cat $env_dir/$e)"
+      :
+    done
+  fi
+}
