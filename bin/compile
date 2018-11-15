@@ -22,12 +22,12 @@ make install >/dev/null 2>&1
 echo "Running make with target distclean"
 make distclean > /dev/null 2>&1
 
-echo "Cloning happybits ffmpeg" | indent
-git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
-cd happybits-ffmpeg-fork
-./configure
-make
-make install
+# echo "Cloning happybits ffmpeg" | indent
+# git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
+# cd happybits-ffmpeg-fork
+# ./configure
+# make
+# make install
 
 # echo "exporting PATH" | indent
 # PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
