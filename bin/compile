@@ -10,15 +10,11 @@ echo "BUILD_DIR: $BUILD_DIR"
 echo "ENV_DIR: $ENV_DIR"
 echo "exporting PATH:"
 ls $ENV_DIR
-whitelist_regex=${2:-''}
-blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
-if [ -d "$ENV_DIR" ]; then
-  for e in $(ls $ENV_DIR); do
-    echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-    export "$e=$(cat $ENV_DIR/$e)"
-    :
-  done
-fi
+echo "oauth token:"
+cat $ENV_DIR/GIT_OAUTH
+export "GIT_OAUTH=$(cat $ENV_DIR/GIT_OAUTH)"
+echo "GIT_OAUTH: $GIT_OAUTH"
+
 
 echo "Cloning with access token: $GIT_OAUTH"
 git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
