@@ -85,32 +85,32 @@ make distclean > /dev/null 2>&1
 
 # begin ffmpeg
 
-echo "-----> Starting ffmpeg compilation"
-echo "Downloading ffmpeg-3.0.2.tar.bz2" | indent
-wget --quiet https://ffmpeg.org/releases/ffmpeg-3.0.2.tar.bz2
-echo "Unpacking ffmpeg" | indent
-bzip2 -d ffmpeg-3.0.2.tar.bz2
-tar -xf ffmpeg-3.0.2.tar
-cd ffmpeg-3.0.2
-echo "Running configure" | indent
+echo "Cloning happybits ffmpeg" | indent
+cd $BUILD_DIR
+git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
+cd happybits-ffmpeg-fork
+./configure --prefix="$BUILD_DIR" --enable-libmp3lame --enable-libfdk-aac --extra-cflags="-I$BUILD_DIR/include" --extra-ldflags="-L$BUILD_DIR/lib" --enable-shared --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-nonfree --enable-libx264 --disable-doc #>/dev/null 2>&1
+make
+make install
 
-./configure  --prefix="$BUILD_DIR" --enable-libmp3lame --enable-libfdk-aac --extra-cflags="-I$BUILD_DIR/include" --extra-ldflags="-L$BUILD_DIR/lib" --enable-shared --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-nonfree --enable-libx264 --disable-doc #>/dev/null 2>&1
-
-echo "Running make with target install" | indent
-make install #>/dev/null 2>&1
-echo "Running make with target distclean" | indent
-make distclean #> /dev/null 2>&1
+# echo "-----> Starting ffmpeg compilation"
+# echo "Downloading ffmpeg-3.0.2.tar.bz2" | indent
+# wget --quiet https://ffmpeg.org/releases/ffmpeg-3.0.2.tar.bz2
+# echo "Unpacking ffmpeg" | indent
+# bzip2 -d ffmpeg-3.0.2.tar.bz2
+# tar -xf ffmpeg-3.0.2.tar
+# cd ffmpeg-3.0.2
+# echo "Running configure" | indent
+#
+# ./configure  --prefix="$BUILD_DIR" --enable-libmp3lame --enable-libfdk-aac --extra-cflags="-I$BUILD_DIR/include" --extra-ldflags="-L$BUILD_DIR/lib" --enable-shared --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-nonfree --enable-libx264 --disable-doc #>/dev/null 2>&1
+#
+# echo "Running make with target install" | indent
+# make install #>/dev/null 2>&1
+# echo "Running make with target distclean" | indent
+# make distclean #> /dev/null 2>&1
 
 echo "-----> Caching build."
 mkdir -p $2
 cp -R "$BUILD_DIR/" $2
 
 create_profile_script
-
-echo "Cloning happybits ffmpeg" | indent
-cd $BUILD_DIR
-git clone https://$GIT_OAUTH@github.com/happybits/happybits-ffmpeg-fork
-cd happybits-ffmpeg-fork
-./configure
-make
-make install
