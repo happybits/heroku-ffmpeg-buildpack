@@ -8,7 +8,8 @@ VENDOR_DIR="vendor"
 
 echo "BUILD_DIR: $BUILD_DIR"
 echo "ENV_DIR: $ENV_DIR"
-echo "exporting PATH"
+echo "exporting PATH:"
+ls $ENV_DIR
 whitelist_regex=${2:-''}
 blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
 if [ -d "$ENV_DIR" ]; then
